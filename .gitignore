@@ -429,3 +429,5 @@ FodyWeavers.xsd
 *.msp
 
 ref/*
+
+.DS_STORE
