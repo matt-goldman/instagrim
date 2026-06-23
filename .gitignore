@@ -431,3 +431,9 @@ FodyWeavers.xsd
 ref/*
 
 .DS_STORE
+
+
+.idea/
+
+# Ignore Unsplash API key
+src/Resources/Raw/ApiKey.txt
