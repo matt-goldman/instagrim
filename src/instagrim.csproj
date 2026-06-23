@@ -68,4 +68,8 @@
 		<PackageReference Include="Plugin.Maui.Lucide" Version="1.0.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Controls\" />
+	</ItemGroup>
+
 </Project>

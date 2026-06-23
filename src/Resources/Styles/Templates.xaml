@@ -7,7 +7,6 @@
         <Grid HorizontalOptions="Fill"
               VerticalOptions="Fill"
               Padding="0"
-              SafeAreaEdges="None"
               RowDefinitions="3*,*">
             <Grid HorizontalOptions="Fill"
                   VerticalOptions="Fill"

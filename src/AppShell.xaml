@@ -1,5 +1,7 @@
 <Shell
     x:Class="instagrim.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:instagrim"
     NavBarIsVisible="False"
     Title="instagrim">
