@@ -1,6 +1,7 @@
 <Shell
     x:Class="instagrim.AppShell"
     xmlns:local="clr-namespace:instagrim"
+    NavBarIsVisible="False"
     Title="instagrim">
 
     <ShellContent

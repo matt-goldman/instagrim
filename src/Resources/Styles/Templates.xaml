@@ -1,3 +1,74 @@
-<ResourceDictionary>
-    
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:icons="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="PageTemplate">
+        <Grid HorizontalOptions="Fill"
+              VerticalOptions="Fill"
+              Padding="0"
+              SafeAreaEdges="None"
+              RowDefinitions="3*,*">
+            <Grid HorizontalOptions="Fill"
+                  VerticalOptions="Fill"
+                  Background="{DynamicResource PrimaryRadialGradient}"/>
+            <Grid HorizontalOptions="Fill"
+                  VerticalOptions="Fill"
+                  Grid.Row="1"
+                  Background="{DynamicResource AccentRadialGradient}"/>
+            <Grid HorizontalOptions="Fill"
+                  VerticalOptions="Fill"
+                  RowDefinitions="50,*"
+                  Padding="0"
+                  Grid.RowSpan="2"
+                  x:Name="MainLayout"
+                  SafeAreaEdges="None">
+                <FlexLayout HorizontalOptions="Fill"
+                            Direction="Row"
+                            JustifyContent="SpaceBetween"
+                            Background="{DynamicResource Background}"
+                            AlignContent="Center"
+                            AlignItems="Center">
+                    <HorizontalStackLayout Margin="10,0"
+                                           VerticalOptions="Center"
+                                           Spacing="5">
+                        <icons:Icon 
+                            Name="{StaticResource Ghost}"
+                            Size="24"
+                            Color="{DynamicResource Primary}" />
+                        
+                        <Label Text="Instagrim"
+                               TextTransform="Uppercase"
+                               FontSize="24"
+                               FontFamily="Creepster"
+                               TextColor="{DynamicResource Primary}">
+                            <Label.Shadow>
+                                <Shadow Brush="{DynamicResource PrimaryRadialGradient}" Offset="0,0" Radius="20" Opacity="0.9" />
+                            </Label.Shadow>
+                        </Label>
+                    </HorizontalStackLayout>
+                    
+                    <HorizontalStackLayout Margin="10,0"
+                                           Spacing="5">
+                        <icons:Icon 
+                            Name="{StaticResource Heart}"
+                            Size="24"
+                            Color="White" />
+                        
+                        <icons:Icon 
+                            Name="{StaticResource Send}"
+                            Size="24"
+                            Color="White" />
+                        
+                    </HorizontalStackLayout>
+                </FlexLayout>
+                <BoxView Color="{DynamicResource Border}"
+                         HeightRequest="1"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="End"/>
+                
+                <ContentPresenter Grid.Row="1" />
+            </Grid>
+        </Grid>
+    </ControlTemplate>
 </ResourceDictionary>
