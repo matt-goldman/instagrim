@@ -42,13 +42,13 @@
                                FontFamily="Creepster"
                                TextColor="{DynamicResource Primary}">
                             <Label.Shadow>
-                                <Shadow Brush="{DynamicResource PrimaryRadialGradient}" Offset="0,0" Radius="20" Opacity="0.9" />
+                                <Shadow Brush="{DynamicResource PrimaryBrush}" Offset="0,0" Radius="10" Opacity="0.9" />
                             </Label.Shadow>
                         </Label>
                     </HorizontalStackLayout>
                     
                     <HorizontalStackLayout Margin="10,0"
-                                           Spacing="10">
+                                           Spacing="20">
                         <icons:Icon 
                             Name="{StaticResource Heart}"
                             Size="24"

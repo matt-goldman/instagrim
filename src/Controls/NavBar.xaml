@@ -57,5 +57,23 @@
                     HeightRequest="70">
         
         </FlexLayout>
+        
+        <ImageButton VerticalOptions="Center"
+                     HorizontalOptions="Center"
+                     WidthRequest="80"
+                     HeightRequest="80"
+                     CornerRadius="40"
+                     TranslationY="-40"
+                     BackgroundColor="{DynamicResource Primary}"
+                     BorderColor="{DynamicResource PrimaryForeground}"
+                     BorderWidth="2"
+                     Padding="15"
+                     Source="{FontImageSource FontFamily=Lucide,
+                                              Glyph={StaticResource Camera},
+                                              Color={DynamicResource PrimaryForeground}}">
+            <ImageButton.Shadow>
+                <Shadow Brush="{DynamicResource PrimaryBrush}" Offset="0,0" Radius="20" Opacity="0.9" />
+            </ImageButton.Shadow>
+        </ImageButton>
     </Grid>
 </fs:FsTabBarBase>
