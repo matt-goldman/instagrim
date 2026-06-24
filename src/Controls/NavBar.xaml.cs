@@ -14,10 +14,8 @@ public partial class NavBar : FsTabBarBase
 
     protected override void OnTabTapped(FsTabContext context)
     {
-        if (context.Route == "action")
+        if (context.Title == "Action")
         {
-            var newContext = new FsTabContext(SelectedRoute!);
-            base.OnTabTapped(newContext);
             return;
         }
         

@@ -4,6 +4,8 @@
              x:Class="instagrim.Pages.Feed"
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{DynamicResource PageTemplate}">
-    <Label Text="Feed"></Label>
+    <Label Text="Feed"
+           TextColor="White"
+           HorizontalOptions="Center"></Label>
         
 </ContentPage>

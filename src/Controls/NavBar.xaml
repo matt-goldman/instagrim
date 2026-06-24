@@ -6,8 +6,8 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                  x:Class="instagrim.Controls.NavBar">
     <fs:FsTabBarBase.Resources>
-        <converters:RouteToGlyphConverter x:Key="RouteToGlyph" />
-        <converters:RouteToIsVisibleConverter x:Key="RouteToVisible" />
+        <converters:TitleToGlyphConverter x:Key="TitleToGlyph" />
+        <converters:TitleToIsVisibleConverter x:Key="TitleToVisible" />
     </fs:FsTabBarBase.Resources>
     <fs:FsTabBarBase.ItemTemplate>
         <DataTemplate x:DataType="fs:FsTabContext">
@@ -27,20 +27,13 @@
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
                 <VerticalStackLayout HorizontalOptions="Center"
-                                     VerticalOptions="Center"
-                                     BackgroundColor="Aqua">
+                                     VerticalOptions="Center">
                     <icons:Icon HorizontalOptions="Center"
-                                IsVisible="{Binding Route, Converter={StaticResource RouteToVisible}}"
-                                Name="{Binding Route, Converter={StaticResource RouteToGlyph}}"
+                                IsVisible="{Binding Title, Converter={StaticResource TitleToVisible}}"
+                                Name="{Binding Title, Converter={StaticResource TitleToGlyph}}"
                                 Color="White"
-                                Size="24"
+                                Size="36"
                                 x:Name="IconImage"/>
-                    
-                    <icons:Icon HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                Name="{StaticResource Skull}"
-                                Color="White"
-                                Size="32"/>
                 </VerticalStackLayout>
             </Grid>
         </DataTemplate>
@@ -61,7 +54,6 @@
                     JustifyContent="SpaceAround"
                     AlignContent="Center"
                     AlignItems="Center"
-                    BackgroundColor="Pink"
                     HeightRequest="70">
         
         </FlexLayout>

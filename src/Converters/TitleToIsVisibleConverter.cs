@@ -2,16 +2,16 @@ using System.Globalization;
 
 namespace instagrim.Converters;
 
-public class RouteToIsVisibleConverter : IValueConverter
+public class TitleToIsVisibleConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not string route)
+        if (value is string title)
         {
-            throw new NotImplementedException();
+            return title != "Action";
         }
-
-        return true;//route != "action";
+        
+        return false;
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
