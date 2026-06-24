@@ -77,7 +77,7 @@
   <SolidColorBrush x:Key="SidebarRingBrush" Color="{DynamicResource SidebarRing}" />
   
   <RadialGradientBrush x:Key="PrimaryRadialGradient"
-                       Center="0.5,0.25">
+                       Center="0.5,0.4">
       <GradientStop Color="{DynamicResource Primary}"
                     Offset="0.1"/>
       <GradientStop Color="{DynamicResource Background}"

@@ -1,14 +1,41 @@
-<Shell
+<fs:FsShell
     x:Class="instagrim.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:instagrim"
+    xmlns:pages="clr-namespace:instagrim.Pages"
+    xmlns:controls="clr-namespace:instagrim.Controls"
+    xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
     NavBarIsVisible="False"
+    TabBarIsDocked="False"
     Title="instagrim">
+    <fs:FsShell.TabBar>
+        <controls:NavBar />
+    </fs:FsShell.TabBar>
+    <TabBar>
+        <ShellContent
+            Title="Feed"
+            ContentTemplate="{DataTemplate pages:Feed}"
+            Route="feed" />
+        
+        <ShellContent
+            Title="Discover"
+            ContentTemplate="{DataTemplate pages:Discover}"
+            Route="discover" />
+        
+        <!-- no content, reserves space for the action button -->
+        <ShellContent
+            Title="Action"
+            Route="action" />
+        
+        <ShellContent
+            Title="Hauntings"
+            ContentTemplate="{DataTemplate pages:Hauntings}"
+            Route="hauntings" />
+        
+        <ShellContent
+            Title="Profile"
+            ContentTemplate="{DataTemplate pages:Profile}"
+            Route="profile" />
+    </TabBar>
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
-</Shell>
+</fs:FsShell>

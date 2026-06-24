@@ -1,6 +1,8 @@
-﻿namespace instagrim;
+﻿using FlagstoneUI.Core.Controls;
 
-public partial class AppShell : Shell
+namespace instagrim;
+
+public partial class AppShell : FsShell
 {
 	public AppShell()
 	{

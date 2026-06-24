@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FlagstoneUI.Core.Builders;
+using Microsoft.Extensions.Logging;
 using Plugin.Maui.Lucide;
 
 namespace instagrim;
@@ -16,7 +17,8 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				fonts.AddFont("Creepster-Regular.ttf", "Creepster");
 			})
-			.UseLucide();
+			.UseLucide()
+			.UseFlagstoneUI();
 
 #if DEBUG
 		builder.Logging.AddDebug();
