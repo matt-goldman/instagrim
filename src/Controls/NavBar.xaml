@@ -66,8 +66,8 @@
                      TranslationY="-40"
                      BackgroundColor="{DynamicResource Primary}"
                      BorderColor="{DynamicResource PrimaryForeground}"
-                     BorderWidth="2"
-                     Padding="15"
+                     BorderWidth="3"
+                     Padding="20"
                      Source="{FontImageSource FontFamily=Lucide,
                                               Glyph={StaticResource Camera},
                                               Color={DynamicResource PrimaryForeground}}">

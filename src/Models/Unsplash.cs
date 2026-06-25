@@ -13,8 +13,8 @@ public class Results
 {
     public required string Id { get; set; }
     public AlternativeSlugs? AlternativeSlugs { get; set; }
-    public required string CreatedAt { get; set; }
-    public required string UpdatedAt { get; set; }
+    public string? CreatedAt { get; set; }
+    public string? UpdatedAt { get; set; }
     public string? PromotedAt { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }
@@ -51,12 +51,12 @@ public class AlternativeSlugs
 
 public class Urls
 {
-    public required string Raw { get; set; }
-    public required string Full { get; set; }
+    public string? Raw { get; set; }
+    public string? Full { get; set; }
     public required string Regular { get; set; }
-    public required string Small { get; set; }
-    public required string Thumb { get; set; }
-    public required string SmallS3 { get; set; }
+    public string? Small { get; set; }
+    public string? Thumb { get; set; }
+    public string? SmallS3 { get; set; }
 }
 
 public class TopicSubmissions
@@ -86,16 +86,16 @@ public class Wallpapers
 
 public class Links
 {
-    public required string Self { get; set; }
-    public required string Html { get; set; }
-    public required string Download { get; set; }
-    public required string DownloadLocation { get; set; }
+    public string? Self { get; set; }
+    public string? Html { get; set; }
+    public string? Download { get; set; }
+    public string? DownloadLocation { get; set; }
 }
 
 public class User
 {
     public required string Id { get; set; }
-    public required string UpdatedAt { get; set; }
+    public string? UpdatedAt { get; set; }
     public required string Username { get; set; }
     public string? Name { get; set; }
     public string? FirstName { get; set; }

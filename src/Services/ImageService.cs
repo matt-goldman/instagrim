@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using instagrim.Models;
 
@@ -8,11 +7,11 @@ public class ImageService
 {
     private HttpClient? _httpClient;
     
-    private readonly SemaphoreSlim _httpClientQueue =  new SemaphoreSlim(1, 1);
+    private readonly SemaphoreSlim _httpClientQueue =  new(1, 1);
 
     private const string SearchQuery = "search/photos?query=halloween";
 
-    private IReadOnlyList<string> Locations =>
+    private static IReadOnlyList<string> Locations =>
     [
         "Sleepy Hollow",
         "Salem",
@@ -46,7 +45,7 @@ public class ImageService
             BaseAddress = new Uri("https://api.unsplash.com/")
         };
         
-        _httpClient.DefaultRequestHeaders.Add("Client-ID", apiKey);
+        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Client-ID {apiKey}");
         
         _httpClientQueue.Release();
         return _httpClient;
@@ -57,7 +56,7 @@ public class ImageService
         var client = await GetClient();
         var unsplashResponse = await client.GetFromJsonAsync<UnsplashResponse>(SearchQuery);
 
-        if (!(unsplashResponse?.Results?.Length > 0))
+        if (!(unsplashResponse?.Results.Length > 0))
         {
             return [];
         }
@@ -75,10 +74,10 @@ public class ImageService
             
             posts.Add(new Post
             {
-                ImageUrl    = result.Urls!.Regular!,
+                ImageUrl    = result.Urls.Regular,
                 Location    = location,
                 Username    = result.User.InstagramUsername??result.User.Username,
-                Description = result.Description!,
+                Description = result.Description,
                 Likes       = result.Likes,
                 IsFavourite = Random.Shared.Next() % 2 == 0,
                 Comments    = result.User.TotalPhotos,

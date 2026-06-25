@@ -4,5 +4,16 @@
              xmlns:models="clr-namespace:instagrim.Models"
              x:DataType="models:Post"
              x:Class="instagrim.Controls.PostView">
-    
+    <Grid ColumnDefinitions="*,30"
+          RowDefinitions="30,*,30,10,Auto,10,10"
+          VerticalOptions="Fill"
+          HorizontalOptions="Fill"
+          x:Name="LayoutGrid">
+        <Image Grid.Row="1"
+               Grid.ColumnSpan="2"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
+               Aspect="AspectFill"
+               Source="{Binding ImageUrl}" />
+    </Grid>
 </ContentView>

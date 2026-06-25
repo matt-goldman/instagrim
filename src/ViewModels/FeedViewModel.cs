@@ -17,7 +17,8 @@ public partial class FeedViewModel (ImageService service) : ObservableObject, IV
     {
         IsBusy = true;
         var results = await service.GetFeed();
-        Feed = new ObservableCollection<Post>(results);
+        Feed.Clear();
+        results.ForEach(r => Feed.Add(r));
         IsBusy = false;
     }
 }
