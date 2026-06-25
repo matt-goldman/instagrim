@@ -1,10 +1,12 @@
 ﻿using FlagstoneUI.Core.Builders;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Lucide;
+using Plugin.Maui.SmartNavigation.Attributes;
 
 namespace instagrim;
 
-public static class MauiProgram
+[UseAutoDependencies]
+public static partial class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
@@ -18,7 +20,8 @@ public static class MauiProgram
 				fonts.AddFont("Creepster-Regular.ttf", "Creepster");
 			})
 			.UseLucide()
-			.UseFlagstoneUI();
+			.UseFlagstoneUI()
+			.UseAutodependencies();
 
 #if DEBUG
 		builder.Logging.AddDebug();
