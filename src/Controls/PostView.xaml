@@ -2,18 +2,111 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:instagrim.Models"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:icons="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              x:DataType="models:Post"
              x:Class="instagrim.Controls.PostView">
-    <Grid ColumnDefinitions="*,30"
-          RowDefinitions="30,*,30,10,Auto,10,10"
+    <Grid ColumnDefinitions="*,40"
+          RowDefinitions="40,*,40,20,40,20,20"
           VerticalOptions="Fill"
           HorizontalOptions="Fill"
+          Margin="0,0,0,10"
+          Background="{DynamicResource Background40}"
           x:Name="LayoutGrid">
+        <HorizontalStackLayout VerticalOptions="Fill"
+                               HorizontalOptions="Fill"
+                               Padding="0"
+                               Margin="0">
+            <Border StrokeThickness="2"
+                    Stroke="{DynamicResource AvatarBorder}"
+                    StrokeShape="Ellipse"
+                    Padding="0"
+                    Margin="10,0,5,5"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                <mct:AvatarView WidthRequest="30"
+                                HeightRequest="30"
+                                VerticalOptions="Center"
+                                BorderWidth="0"
+                                Margin="0"
+                                ImageSource="{Binding AvatarUrl}"
+                                Text="{Binding Initial}"
+                                TextColor="{DynamicResource Accent}"/>
+            </Border>
+            <VerticalStackLayout VerticalOptions="Start"
+                                 Margin="0">
+                <Label Text="{Binding Username}"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       VerticalOptions="End"
+                       VerticalTextAlignment="End"
+                       FontFamily="OpenSansSemibold"
+                       FontSize="Small" />
+                <HorizontalStackLayout VerticalOptions="Start" Spacing="5">
+                    <icons:Icon Color="{DynamicResource Primary}"
+                                Size="11"
+                                VerticalOptions="Center"
+                                Name="{StaticResource MapPin}" />
+                    <Label FontSize="11"
+                           TextColor="White"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           Text="{Binding Location}"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        
+        <icons:Icon Grid.Column="1"
+                    Color="White"
+                    Size="24"
+                    Name="{StaticResource Ellipsis}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"/>
+            
         <Image Grid.Row="1"
                Grid.ColumnSpan="2"
                HorizontalOptions="Fill"
                VerticalOptions="Fill"
                Aspect="AspectFill"
                Source="{Binding ImageUrl}" />
+        
+        <HorizontalStackLayout Grid.Row="2"
+                               Margin="10,5"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Fill"
+                               Spacing="10">
+            <icons:Icon Color="White"
+                        Size="28"
+                        Name="{StaticResource Heart}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+            <icons:Icon Color="White"
+                        Size="28"
+                        Name="{StaticResource MessageCircle}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+            <icons:Icon Color="White"
+                        Size="28"
+                        Name="{StaticResource Send}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+        </HorizontalStackLayout>
+        
+        <icons:Icon Grid.Row="2"
+                    Grid.Column="2"
+                    Color="White"
+                    Size="28"
+                    Name="{StaticResource Bookmark}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="0,0,10,0"/>
+        
+        
+        <BoxView Grid.Row="6"
+                 Grid.ColumnSpan="2"
+                 HorizontalOptions="Fill"
+                 VerticalOptions="End"
+                 HeightRequest="1"
+                 Color="{DynamicResource Border}" />
     </Grid>
 </ContentView>

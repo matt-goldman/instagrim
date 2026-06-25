@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Text.Json;
 using instagrim.Models;
 
 namespace instagrim.Services;
@@ -10,6 +11,9 @@ public class ImageService
     private readonly SemaphoreSlim _httpClientQueue =  new(1, 1);
 
     private const string SearchQuery = "search/photos?query=halloween";
+
+    private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
+        { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
 
     private static IReadOnlyList<string> Locations =>
     [
@@ -54,7 +58,7 @@ public class ImageService
     public async Task<List<Post>> GetFeed()
     {
         var client = await GetClient();
-        var unsplashResponse = await client.GetFromJsonAsync<UnsplashResponse>(SearchQuery);
+        var unsplashResponse = await client.GetFromJsonAsync<UnsplashResponse>(SearchQuery, _jsonOptions);
 
         if (!(unsplashResponse?.Results.Length > 0))
         {

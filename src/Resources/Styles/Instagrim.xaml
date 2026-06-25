@@ -12,6 +12,7 @@
   <Color x:Key="AccentForeground">#110D17</Color>
   <Color x:Key="Background">#110D17</Color>
   <Color x:Key="Background80">#110D1780</Color>
+  <Color x:Key="Background40">#110D1740</Color>
   <Color x:Key="Black">#000000</Color>
   <Color x:Key="Border">#1AFFFFFF</Color>
   <Color x:Key="Card">#1A1622</Color>
@@ -91,5 +92,14 @@
       <GradientStop Color="{DynamicResource Background}"
                     Offset="0.7"/>
   </RadialGradientBrush>
+  
+  <LinearGradientBrush x:Key="AvatarBorder"
+                       StartPoint="0,0"
+                       EndPoint="1,1">
+      <GradientStop Color="{DynamicResource Accent}"
+                    Offset="0.1" />
+      <GradientStop Color="{DynamicResource Primary}"
+                    Offset="1.0" />
+  </LinearGradientBrush>
 
 </ResourceDictionary>

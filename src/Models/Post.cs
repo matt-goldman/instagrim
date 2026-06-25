@@ -6,6 +6,8 @@ public class Post
 
     public required string ImageUrl { get; set; }
     
+    public string Initial => Username[..1];
+    
     public string? AvatarUrl { get; set; }
     
     public DateTime? Posted { get; set; }

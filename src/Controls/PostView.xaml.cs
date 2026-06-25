@@ -12,13 +12,13 @@ public partial class PostView : ContentView
         base.OnSizeAllocated(width, height);
         LayoutGrid.RowDefinitions = new RowDefinitionCollection()
         {
-            new RowDefinition(30),
+            new RowDefinition(40),
             new RowDefinition(width),
-            new RowDefinition(30),
-            new RowDefinition(10),
-            new RowDefinition(GridLength.Auto),
-            new RowDefinition(10),
-            new RowDefinition(10),
+            new RowDefinition(40),
+            new RowDefinition(20),
+            new RowDefinition(40),
+            new RowDefinition(20),
+            new RowDefinition(20),
         };
     }
 }

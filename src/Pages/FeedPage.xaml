@@ -15,7 +15,7 @@
           HorizontalOptions="Fill"
           Padding="0"
           Margin="0"
-          RowDefinitions="100,*">
+          RowDefinitions="80,*">
         <ScrollView HorizontalOptions="Fill"
                     VerticalOptions="Center"
                     Orientation="Horizontal">
