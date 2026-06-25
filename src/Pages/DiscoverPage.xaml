@@ -4,5 +4,11 @@
              x:Class="instagrim.Pages.DiscoverPage"
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{DynamicResource PageTemplate}">
-<Label Text="Discover"></Label>
+<Label Text="Discover"
+       FontSize="Title"
+       TextColor="White"
+       HorizontalOptions="Center"
+       VerticalOptions="Center"
+       FontAttributes="Bold"
+       FontFamily="OpenSansSemibold" />
 </ContentPage>

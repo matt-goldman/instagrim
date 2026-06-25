@@ -4,10 +4,12 @@
                  xmlns:icons="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
                  xmlns:converters="clr-namespace:instagrim.Converters"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                  x:Class="instagrim.Controls.NavBar">
     <fs:FsTabBarBase.Resources>
         <converters:TitleToGlyphConverter x:Key="TitleToGlyph" />
         <converters:TitleToIsVisibleConverter x:Key="TitleToVisible" />
+        <mct:IsEqualConverter x:Key="IsEqual" />
     </fs:FsTabBarBase.Resources>
     <fs:FsTabBarBase.ItemTemplate>
         <DataTemplate x:DataType="fs:FsTabContext">
@@ -26,15 +28,34 @@
                         </VisualState>
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
-                <VerticalStackLayout HorizontalOptions="Center"
-                                     VerticalOptions="Center">
+                <Grid HorizontalOptions="Center"
+                      VerticalOptions="Center">
                     <icons:Icon HorizontalOptions="Center"
                                 IsVisible="{Binding Title, Converter={StaticResource TitleToVisible}}"
                                 Name="{Binding Title, Converter={StaticResource TitleToGlyph}}"
                                 Color="White"
                                 Size="36"
                                 x:Name="IconImage"/>
-                </VerticalStackLayout>
+                    <Border HorizontalOptions="End"
+                            VerticalOptions="Start"
+                            StrokeShape="Ellipse"
+                            StrokeThickness="0"
+                            HeightRequest="20"
+                            WidthRequest="20"
+                            TranslationX="5"
+                            TranslationY="-5"
+                            Background="{DynamicResource Accent}"
+                            IsVisible="{Binding Title, Converter={StaticResource IsEqual}, ConverterParameter='Hauntings'}">
+                        <Label HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="12"
+                               Text="6" />
+                    </Border>
+                </Grid>
             </Grid>
         </DataTemplate>
     </fs:FsTabBarBase.ItemTemplate>
@@ -70,7 +91,9 @@
                      Padding="20"
                      Source="{FontImageSource FontFamily=Lucide,
                                               Glyph={StaticResource Camera},
-                                              Color={DynamicResource PrimaryForeground}}">
+                                              Color={DynamicResource PrimaryForeground}}"
+                     x:Name="ActionButton"
+                     Clicked="ActionButton_OnClicked">
             <ImageButton.Shadow>
                 <Shadow Brush="{DynamicResource PrimaryBrush}" Offset="0,0" Radius="20" Opacity="0.9" />
             </ImageButton.Shadow>

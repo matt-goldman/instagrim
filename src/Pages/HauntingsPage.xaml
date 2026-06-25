@@ -4,5 +4,11 @@
              x:Class="instagrim.Pages.HauntingsPage"
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{DynamicResource PageTemplate}">
-<Label Text="Hauntings"></Label>
+    <Label Text="Hauntings"
+           FontSize="Title"
+           TextColor="White"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           FontAttributes="Bold"
+           FontFamily="OpenSansSemibold" />
 </ContentPage>
