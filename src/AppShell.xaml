@@ -14,12 +14,12 @@
     <TabBar>
         <ShellContent
             Title="Feed"
-            ContentTemplate="{DataTemplate pages:Feed}"
+            ContentTemplate="{DataTemplate pages:FeedPage}"
             Route="feed" />
         
         <ShellContent
             Title="Discover"
-            ContentTemplate="{DataTemplate pages:Discover}"
+            ContentTemplate="{DataTemplate pages:DiscoverPage}"
             Route="discover" />
         
         <!-- no content, reserves space for the action button -->
@@ -29,12 +29,12 @@
         
         <ShellContent
             Title="Hauntings"
-            ContentTemplate="{DataTemplate pages:Hauntings}"
+            ContentTemplate="{DataTemplate pages:HauntingsPage}"
             Route="hauntings" />
         
         <ShellContent
             Title="Profile"
-            ContentTemplate="{DataTemplate pages:Profile}"
+            ContentTemplate="{DataTemplate pages:ProfilePage}"
             Route="profile" />
     </TabBar>
 

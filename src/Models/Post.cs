@@ -5,6 +5,10 @@ public class Post
     public required string Username { get; set; }
 
     public required string ImageUrl { get; set; }
+    
+    public string? AvatarUrl { get; set; }
+    
+    public DateTime? Posted { get; set; }
 
     public required string Location { get; set; }
 

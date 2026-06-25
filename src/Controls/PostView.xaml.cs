@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace instagrim.Pages;
+namespace instagrim.Controls;
 
-public partial class Feed : ContentPage
+public partial class PostView : ContentView
 {
-    public Feed()
+    public PostView()
     {
         InitializeComponent();
     }

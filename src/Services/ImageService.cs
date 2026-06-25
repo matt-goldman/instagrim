@@ -68,6 +68,11 @@ public class ImageService
         {
             var locationIndex = Random.Shared.Next(Locations.Count);
             var location = Locations[locationIndex];
+            if (!DateTime.TryParse(result.UpdatedAt, out var updatedAt))
+            {
+                updatedAt = DateTime.UtcNow.AddHours(-2);
+            }
+            
             posts.Add(new Post
             {
                 ImageUrl    = result.Urls!.Regular!,
@@ -78,6 +83,8 @@ public class ImageService
                 IsFavourite = Random.Shared.Next() % 2 == 0,
                 Comments    = result.User.TotalPhotos,
                 IsLiked     = Random.Shared.Next() % 2 == 0,
+                AvatarUrl   = result.User.ProfileImage?.Small,
+                Posted      = updatedAt
             });
         }
         

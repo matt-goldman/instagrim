@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:smart="clr-namespace:Plugin.Maui.SmartNavigation.Behaviours;assembly=Plugin.Maui.SmartNavigation"
+             xmlns:controls="clr-namespace:instagrim.Controls"
+             xmlns:vm="clr-namespace:instagrim.ViewModels"
+             x:DataType="vm:FeedViewModel"
+             x:Class="instagrim.Pages.FeedPage"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{DynamicResource PageTemplate}">
+    <ContentPage.Behaviors>
+        <smart:NavigatedInitBehavior />
+    </ContentPage.Behaviors>
+    <Grid VerticalOptions="Fill"
+          HorizontalOptions="Fill"
+          Padding="0"
+          Margin="0"
+          RowDefinitions="100,*">
+        <ScrollView HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    Orientation="Horizontal">
+            <Label TextColor="White" Text="PLACEHOLDER for stories" />
+        </ScrollView>
+        
+        <CollectionView Grid.Row="1"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        Margin="0"
+                        ItemsSource="{Binding Feed}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <controls:PostView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyViewTemplate>
+                <DataTemplate>
+                    <ActivityIndicator HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       IsEnabled="True"
+                                       IsRunning="True"
+                                       Width="30"
+                                       Color="{DynamicResource Primary}"/>
+                </DataTemplate>
+            </CollectionView.EmptyViewTemplate>
+        </CollectionView>
+    </Grid>
+        
+</ContentPage>

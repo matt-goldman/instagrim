@@ -1,4 +1,5 @@
-﻿using FlagstoneUI.Core.Builders;
+﻿using CommunityToolkit.Maui;
+using FlagstoneUI.Core.Builders;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Lucide;
 using Plugin.Maui.SmartNavigation.Attributes;
@@ -19,7 +20,7 @@ public static partial class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				fonts.AddFont("Creepster-Regular.ttf", "Creepster");
 			})
-			.UseCommunityToolkit()
+			.UseMauiCommunityToolkit()
 			.UseLucide()
 			.UseFlagstoneUI()
 			.UseAutodependencies();

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace instagrim.Pages;
 
-public partial class Hauntings : ContentPage
+public partial class HauntingsPage : ContentPage
 {
-    public Hauntings()
+    public HauntingsPage()
     {
         InitializeComponent();
     }

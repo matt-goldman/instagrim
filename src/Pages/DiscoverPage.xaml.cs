@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace instagrim.Pages;
 
-public partial class Discover : ContentPage
+public partial class DiscoverPage : ContentPage
 {
-    public Discover()
+    public DiscoverPage()
     {
         InitializeComponent();
     }
