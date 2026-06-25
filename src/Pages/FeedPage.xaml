@@ -16,11 +16,12 @@
           Padding="0"
           Margin="0"
           RowDefinitions="80,*">
-        <ScrollView HorizontalOptions="Fill"
-                    VerticalOptions="Center"
-                    Orientation="Horizontal">
-            <Label TextColor="White" Text="PLACEHOLDER for stories" />
-        </ScrollView>
+        <CollectionView ItemsLayout="Horizontal"
+                        VerticalOptions="Fill"
+                        HorizontalOptions="Fill"
+                        ItemsSource="{Binding Users}">
+            
+        </CollectionView>
         
         <CollectionView Grid.Row="1"
                         HorizontalOptions="Fill"

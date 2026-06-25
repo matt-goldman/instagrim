@@ -12,6 +12,16 @@ public class ImageService
 
     private const string SearchQuery = "search/photos?query=halloween";
 
+    private readonly User _currentUser = new User
+    {
+        Id          = "me",
+        Username    = "Your story"
+    };
+
+    private readonly List<User> _users = [];
+
+    private readonly List<Post> _posts = [];
+
     private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
         { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
 
@@ -55,8 +65,33 @@ public class ImageService
         return _httpClient;
     }
 
+    public async Task<List<User>> GetUsers()
+    {
+        if (_users.Count > 0)
+        {
+            return _users;
+        }
+
+        await GetFeed();
+        
+        return _users;
+    }
+
     public async Task<List<Post>> GetFeed()
     {
+        await _httpClientQueue.WaitAsync();
+
+        if (_posts.Count > 0)
+        {
+            _httpClientQueue.Release();
+            return _posts;
+        }
+        
+        _users.Clear();
+        _posts.Clear();
+        
+        _users.Add(_currentUser);
+        
         var client = await GetClient();
         var unsplashResponse = await client.GetFromJsonAsync<UnsplashResponse>(SearchQuery, _jsonOptions);
 
@@ -64,8 +99,6 @@ public class ImageService
         {
             return [];
         }
-
-        var posts = new List<Post>();
 
         foreach (var result in unsplashResponse.Results)
         {
@@ -76,7 +109,7 @@ public class ImageService
                 updatedAt = DateTime.UtcNow.AddHours(-2);
             }
             
-            posts.Add(new Post
+            _posts.Add(new Post
             {
                 ImageUrl    = result.Urls.Regular,
                 Location    = location,
@@ -89,9 +122,13 @@ public class ImageService
                 AvatarUrl   = result.User.ProfileImage?.Small,
                 Posted      = updatedAt
             });
+            
+            _users.Add(result.User);
         }
         
-        return posts;
+        _httpClientQueue.Release();
+        
+        return _posts;
     }
 
     private static string GetLikes(int likes)

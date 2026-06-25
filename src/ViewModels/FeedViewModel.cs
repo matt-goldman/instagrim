@@ -10,6 +10,8 @@ public partial class FeedViewModel (ImageService service) : ObservableObject, IV
 {
     public ObservableCollection<Post> Feed { get; set; } = [];
     
+    public ObservableCollection<User> Users { get; set; } = [];
+    
     [ObservableProperty]
     public partial bool IsBusy { get; set; }
     
@@ -19,6 +21,10 @@ public partial class FeedViewModel (ImageService service) : ObservableObject, IV
         var results = await service.GetFeed();
         Feed.Clear();
         results.ForEach(r => Feed.Add(r));
+        
+        var users = await service.GetUsers();
+        Users.Clear();
+        users.ForEach(u => Users.Add(u));
         IsBusy = false;
     }
 }
