@@ -82,9 +82,9 @@ public class ImageService
                 Location    = location,
                 Username    = result.User.InstagramUsername??result.User.Username,
                 Description = result.Description,
-                Likes       = result.Likes,
+                Likes       = GetLikes(result.Likes),
                 IsFavourite = Random.Shared.Next() % 2 == 0,
-                Comments    = result.User.TotalPhotos,
+                Comments    = GetComments(result.User.TotalPhotos),
                 IsLiked     = Random.Shared.Next() % 2 == 0,
                 AvatarUrl   = result.User.ProfileImage?.Small,
                 Posted      = updatedAt
@@ -92,5 +92,39 @@ public class ImageService
         }
         
         return posts;
+    }
+
+    private static string GetLikes(int likes)
+    {
+        switch (likes)
+        {
+            case 0:
+                return "No screams";
+            case < 1000:
+                return $"{likes} screams";
+            default:
+            {
+                var likesTruncated = likes / 1000;
+        
+                return $"{likesTruncated:N1}k screams";
+            }
+        }
+    }
+
+    private static string GetComments(int comments)
+    {
+        switch (comments)
+        {
+            case 0:
+                return "No comments";
+            case < 1000:
+                return $"View all {comments} comments";
+            default:
+            {
+                var commentsTruncated = comments / 1000;
+        
+                return $"View all {commentsTruncated:N1}k comments";
+            }
+        }
     }
 }

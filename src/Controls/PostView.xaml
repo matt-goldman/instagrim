@@ -7,11 +7,11 @@
              x:DataType="models:Post"
              x:Class="instagrim.Controls.PostView">
     <Grid ColumnDefinitions="*,40"
-          RowDefinitions="40,*,40,20,40,20,20"
+          RowDefinitions="50,*,40,20,40,20,40"
           VerticalOptions="Fill"
           HorizontalOptions="Fill"
-          Margin="0,0,0,10"
-          Background="{DynamicResource Background40}"
+          Padding="0,0,0,10"
+          Background="{DynamicResource Background80}"
           x:Name="LayoutGrid">
         <HorizontalStackLayout VerticalOptions="Fill"
                                HorizontalOptions="Fill"
@@ -33,7 +33,7 @@
                                 Text="{Binding Initial}"
                                 TextColor="{DynamicResource Accent}"/>
             </Border>
-            <VerticalStackLayout VerticalOptions="Start"
+            <VerticalStackLayout VerticalOptions="Center"
                                  Margin="0">
                 <Label Text="{Binding Username}"
                        TextColor="White"
@@ -101,6 +101,36 @@
                     HorizontalOptions="Center"
                     Margin="0,0,10,0"/>
         
+        <Label Grid.Row="3"
+               FontAttributes="Bold"
+               TextColor="White"
+               FontFamily="OpenSansSemibold"
+               Text="{Binding Likes}"
+               Margin="10,0"/>
+        
+        <HorizontalStackLayout Grid.Row="4"
+                               Margin="10,0"
+                               HorizontalOptions="Fill"
+                               Spacing="5">
+            <Label FontAttributes="Bold"
+                   TextColor="White"
+                   FontFamily="OpenSansSemibold"
+                   Text="{Binding Username}" />
+            
+            <Label Text="{Binding Description}"
+                   LineBreakMode="TailTruncation"
+                   TextColor="White"/>
+        </HorizontalStackLayout>
+        
+        <Label Grid.Row="5"
+               Text="{Binding Comments}"
+               TextColor="White"
+               Margin="10,0"/>
+        
+        <Label Grid.Row="6"
+               Text="{Binding Posted, StringFormat='{0:dd MMM}'}"
+               TextColor="White"
+               Margin="10,0"/>
         
         <BoxView Grid.Row="6"
                  Grid.ColumnSpan="2"

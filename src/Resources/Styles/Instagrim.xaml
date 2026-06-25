@@ -11,8 +11,9 @@
   <Color x:Key="Accent">#75E25C</Color>
   <Color x:Key="AccentForeground">#110D17</Color>
   <Color x:Key="Background">#110D17</Color>
-  <Color x:Key="Background80">#110D1780</Color>
-  <Color x:Key="Background40">#110D1740</Color>
+  <Color x:Key="Background80">#80110D17</Color>
+  <Color x:Key="Background90">#90110D17</Color>
+  <Color x:Key="Background40">#40110D17</Color>
   <Color x:Key="Black">#000000</Color>
   <Color x:Key="Border">#1AFFFFFF</Color>
   <Color x:Key="Card">#1A1622</Color>

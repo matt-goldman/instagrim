@@ -16,9 +16,9 @@ public class Post
 
     public required string Description { get; set; }
 
-    public int Likes { get; set; }
+    public required string Likes { get; set; }
 
-    public int Comments { get; set; }
+    public required string Comments { get; set; }
 
     public bool IsLiked { get; set; }
 
