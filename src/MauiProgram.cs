@@ -19,6 +19,7 @@ public static partial class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				fonts.AddFont("Creepster-Regular.ttf", "Creepster");
 			})
+			.UseCommunityToolkit()
 			.UseLucide()
 			.UseFlagstoneUI()
 			.UseAutodependencies();
