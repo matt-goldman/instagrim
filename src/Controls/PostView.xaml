@@ -11,7 +11,6 @@
           VerticalOptions="Fill"
           HorizontalOptions="Fill"
           Padding="0,0,0,10"
-          Background="{DynamicResource Background80}"
           x:Name="LayoutGrid">
         <HorizontalStackLayout VerticalOptions="Fill"
                                HorizontalOptions="Fill"
@@ -34,7 +33,7 @@
                                 TextColor="{DynamicResource Accent}"/>
             </Border>
             <VerticalStackLayout VerticalOptions="Center"
-                                 Margin="0">
+                                 Margin="5,0,0,5">
                 <Label Text="{Binding Username}"
                        TextColor="White"
                        FontAttributes="Bold"

@@ -1,7 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:instagrim.Converters"
+             xmlns:vm="clr-namespace:instagrim.ViewModels"
+             x:DataType="vm:StoryViewModel"
              x:Class="instagrim.Controls.UserStoryView">
-    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:GlowActiveToShadowConverter ShadowBrush="{StaticResource PrimaryBrush}" x:Key="GlowToShadow" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <VerticalStackLayout Padding="0"
+                         Margin="0"
+                         VerticalOptions="Center">
+        <Grid HeightRequest="60"
+              WidthRequest="80">
+            <Border StrokeThickness="0"
+                    Stroke="{DynamicResource AvatarBorder}"
+                    StrokeShape="Ellipse"
+                    Padding="0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Shadow="{Binding GlowActive, Converter={StaticResource GlowToShadow}}">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border"
+                                 Binding="{Binding BorderActive}"
+                                 Value="True">
+                        <Setter Property="StrokeThickness" Value="2" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <mct:AvatarView WidthRequest="55"
+                                HeightRequest="55"
+                                VerticalOptions="Center"
+                                BorderWidth="0"
+                                BorderColor="{DynamicResource Border}"
+                                Margin="0"
+                                ImageSource="{Binding Avatar}"
+                                Text="{Binding Username}"
+                                TextColor="{DynamicResource Accent}" >
+                    <mct:AvatarView.Triggers>
+                        <DataTrigger TargetType="mct:AvatarView"
+                                     Binding="{Binding BorderActive}"
+                                     Value="False">
+                            <!-- Show AvatarView border when active border is hidden -->
+                            <Setter Property="BorderWidth" Value="2" />
+                        </DataTrigger>
+                    </mct:AvatarView.Triggers>
+                </mct:AvatarView>
+            </Border>
+            <Border HorizontalOptions="End"
+                    VerticalOptions="End"
+                    StrokeShape="Ellipse"
+                    StrokeThickness="0"
+                    HeightRequest="20"
+                    WidthRequest="20"
+                    Background="{DynamicResource Primary}"
+                    IsVisible="{Binding IsMe}">
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSansSemibold"
+                       FontSize="14"
+                       Text="+" />
+            </Border>
+        </Grid>
+        <Label HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               FontSize="12"
+               TextColor="White"
+               Text="{Binding Username}" />
+    </VerticalStackLayout>
 </ContentView>

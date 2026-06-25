@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using instagrim.Models;
+using instagrim.ViewModels;
 
 namespace instagrim.Services;
 
@@ -12,13 +13,7 @@ public class ImageService
 
     private const string SearchQuery = "search/photos?query=halloween";
 
-    private readonly User _currentUser = new User
-    {
-        Id          = "me",
-        Username    = "Your story"
-    };
-
-    private readonly List<User> _users = [];
+    private readonly List<StoryViewModel> _stories = [];
 
     private readonly List<Post> _posts = [];
 
@@ -65,32 +60,36 @@ public class ImageService
         return _httpClient;
     }
 
-    public async Task<List<User>> GetUsers()
+    public async Task<List<StoryViewModel>> GetStories()
     {
-        if (_users.Count > 0)
+        if (_stories.Count > 0)
         {
-            return _users;
+            return _stories;
         }
 
         await GetFeed();
         
-        return _users;
+        return _stories;
     }
 
     public async Task<List<Post>> GetFeed()
     {
-        await _httpClientQueue.WaitAsync();
-
         if (_posts.Count > 0)
         {
-            _httpClientQueue.Release();
             return _posts;
         }
         
-        _users.Clear();
+        _stories.Clear();
         _posts.Clear();
         
-        _users.Add(_currentUser);
+        _stories.Add(new StoryViewModel
+        {
+            IsMe            = true,
+            Avatar          = "jack.png",
+            BorderActive    = false,
+            GlowActive      = false,
+            Username        = "Your story"
+        });
         
         var client = await GetClient();
         var unsplashResponse = await client.GetFromJsonAsync<UnsplashResponse>(SearchQuery, _jsonOptions);
@@ -99,6 +98,8 @@ public class ImageService
         {
             return [];
         }
+
+        var activeStories = 1;
 
         foreach (var result in unsplashResponse.Results)
         {
@@ -123,10 +124,20 @@ public class ImageService
                 Posted      = updatedAt
             });
             
-            _users.Add(result.User);
+            _stories.Add(new StoryViewModel
+            {
+                IsMe            = false,
+                BorderActive    = activeStories < 4,
+                GlowActive      = activeStories < 4,
+                Username        = result.User.InstagramUsername??result.User.Username,
+                Avatar          = result.User.ProfileImage?.Small??"jack.png",
+            });
+
+            if (activeStories < 4)
+            {
+                activeStories++;
+            }
         }
-        
-        _httpClientQueue.Release();
         
         return _posts;
     }

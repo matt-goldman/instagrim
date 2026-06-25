@@ -15,13 +15,24 @@
           HorizontalOptions="Fill"
           Padding="0"
           Margin="0"
-          RowDefinitions="80,*">
-        <CollectionView ItemsLayout="Horizontal"
+          RowDefinitions="100,*"
+          Background="{DynamicResource Background80}">
+        <CollectionView ItemsLayout="HorizontalList"
                         VerticalOptions="Fill"
                         HorizontalOptions="Fill"
-                        ItemsSource="{Binding Users}">
-            
+                        Margin="5,0"
+                        ItemsSource="{Binding Stories}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <controls:UserStoryView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
         </CollectionView>
+        
+        <BoxView HorizontalOptions="Fill"
+                 VerticalOptions="End"
+                 HeightRequest="1"
+                 Color="{DynamicResource Border}" />
         
         <CollectionView Grid.Row="1"
                         HorizontalOptions="Fill"
