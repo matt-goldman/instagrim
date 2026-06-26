@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using instagrim.ViewModels;
 
 namespace instagrim.Pages;
 
 public partial class HauntingsPage : ContentPage
 {
-    public HauntingsPage()
+    public HauntingsPage(HauntingsViewModel viewModel)
     {
         InitializeComponent();
+        BindingContext = viewModel;
     }
 }

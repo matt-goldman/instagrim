@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:smart="clr-namespace:Plugin.Maui.SmartNavigation.Behaviours;assembly=Plugin.Maui.SmartNavigation"
+             xmlns:vm="clr-namespace:instagrim.ViewModels"
+             xmlns:controls="clr-namespace:instagrim.Controls"
+             x:DataType="vm:HauntingsViewModel"
              x:Class="instagrim.Pages.HauntingsPage"
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{DynamicResource PageTemplate}">
-    <Label Text="Hauntings"
-           FontSize="Title"
-           TextColor="White"
-           HorizontalOptions="Center"
-           VerticalOptions="Center"
-           FontAttributes="Bold"
-           FontFamily="OpenSansSemibold" />
+    <ContentPage.Behaviors>
+        <smart:NavigatedInitBehavior />
+    </ContentPage.Behaviors>
+    <VerticalStackLayout VerticalOptions="Fill"
+                         HorizontalOptions="Fill"
+                         BackgroundColor="{DynamicResource Background80}">
+        <Label Text="Hauntings"
+               FontSize="Large"
+               TextColor="White"
+               HorizontalOptions="Start"
+               VerticalOptions="Start"
+               FontAttributes="Bold"
+               Margin="10"
+               FontFamily="OpenSansSemibold" />
+        
+        <CollectionView HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        Margin="0"
+                        ItemsSource="{Binding Updates}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <controls:UpdateView />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyViewTemplate>
+                <DataTemplate>
+                    <ActivityIndicator HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       IsEnabled="True"
+                                       IsRunning="True"
+                                       Width="30"
+                                       Color="{DynamicResource Primary}"/>
+                </DataTemplate>
+            </CollectionView.EmptyViewTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
 </ContentPage>

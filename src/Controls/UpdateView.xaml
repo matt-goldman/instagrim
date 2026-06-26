@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:instagrim.Models"
+             xmlns:icons="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="model:SocialUpdate"
+             x:Class="instagrim.Controls.UpdateView">
+    <Grid VerticalOptions="Fill"
+          HorizontalOptions="Fill"
+          HeightRequest="60"
+          Padding="0"
+          Margin="0">
+        <FlexLayout Direction="Row"
+                    JustifyContent="SpaceBetween"
+                    VerticalOptions="Center"
+                    AlignContent="Center"
+                    AlignItems="Center"
+                    Margin="10,0">
+            <HorizontalStackLayout VerticalOptions="Center">
+                <mct:AvatarView BorderWidth="0"
+                                WidthRequest="30"
+                                HeightRequest="30"
+                                ImageSource="{Binding Avatar}"/>
+                <Label FontAttributes="Bold"
+                       FontFamily="OpenSansSemibold"
+                       VerticalOptions="Center"
+                       TextColor="White"
+                       Margin="5,0,0,0"
+                       Text="{Binding Username}"/>
+                
+                <Label Text=" liked your photo"
+                       VerticalOptions="Center"
+                       TextColor="{DynamicResource MutedForeground}"
+                       IsVisible="{Binding Liked}"/>
+                
+                <Label Text=" started haunting you"
+                       VerticalOptions="Center"
+                       TextColor="{DynamicResource MutedForeground}"
+                       IsVisible="{Binding Haunted}"/>
+                
+                <Label Text="{Binding Scream, StringFormat=' screamed: {0}'}"
+                       MaximumWidthRequest="300"
+                       LineBreakMode="TailTruncation"
+                       VerticalOptions="Center"
+                       TextColor="{DynamicResource MutedForeground}"
+                       IsVisible="{Binding Screamed}"/>
+            </HorizontalStackLayout>
+               <icons:Icon Name="{StaticResource Heart}"
+                           Size="24"
+                           Color="{DynamicResource Primary}"
+                           IsVisible="{Binding Liked}"/>
+               <icons:Icon Name="{StaticResource Heart}"
+                           Size="24"
+                           Color="{DynamicResource Primary}"
+                           IsVisible="{Binding Screamed}"/>
+               
+               <Button BackgroundColor="{DynamicResource Primary}"
+                       MaximumHeightRequest="30"
+                       CornerRadius="15"
+                       Text="Haunt back"
+                       TextColor="Black"
+                       FontSize="11"
+                       Padding="5"
+                       ContentLayout="Left"
+                       ImageSource="{FontImageSource FontFamily=Lucide, Glyph={StaticResource UserPlus}, Color=Black}"
+                       IsVisible="{Binding Haunted}"/>
+        </FlexLayout>
+        
+        <BoxView HorizontalOptions="Fill"
+                 VerticalOptions="End"
+                 HeightRequest="1"
+                 Color="{DynamicResource Border}" />
+    </Grid>
+</ContentView>

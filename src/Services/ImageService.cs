@@ -17,6 +17,8 @@ public class ImageService
 
     private readonly List<Post> _posts = [];
 
+    private readonly List<SocialUpdate> _updates = [];
+
     private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
         { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
 
@@ -32,6 +34,16 @@ public class ImageService
         "Silent Hill",
         "Hawkins, Indiana",
         "Sunnydale"
+    ];
+    
+    private static IReadOnlyList<string> Screams =>
+    [
+        "Spooky! 👻",
+        "Spine-chilling, love it!",
+        "That is one blood-curdling photo",
+        "Terrifying 😱",
+        "what a great 🎃",
+        "🪦 definitely be staying home tonight!"
     ];
 
     private async Task<HttpClient> GetClient()
@@ -55,7 +67,6 @@ public class ImageService
         };
         
         _httpClient.DefaultRequestHeaders.Add("Authorization", $"Client-ID {apiKey}");
-        _httpClient.DefaultRequestHeaders.Add("X-Page-Size", "30");
         
         _httpClientQueue.Release();
         return _httpClient;
@@ -72,6 +83,18 @@ public class ImageService
         
         return _stories;
     }
+    
+    public async Task<List<SocialUpdate>> GetUpdates()
+    {
+        if (_updates.Count > 0)
+        {
+            return  _updates;
+        }
+        
+        await GetFeed();
+        
+        return _updates;
+    }
 
     public async Task<List<Post>> GetFeed()
     {
@@ -82,6 +105,7 @@ public class ImageService
         
         _stories.Clear();
         _posts.Clear();
+        _updates.Clear();
         
         _stories.Add(new StoryViewModel
         {
@@ -111,11 +135,14 @@ public class ImageService
                 updatedAt = DateTime.UtcNow.AddHours(-2);
             }
             
+            var username =  result.User.InstagramUsername??result.User.Username;
+            var avatar = result.User.ProfileImage?.Small ?? "jack.png";
+            
             _posts.Add(new Post
             {
                 ImageUrl    = result.Urls.Regular,
                 Location    = location,
-                Username    = result.User.InstagramUsername??result.User.Username,
+                Username    = username,
                 Description = result.Description,
                 Likes       = GetLikes(result.Likes),
                 IsFavourite = Random.Shared.Next() % 2 == 0,
@@ -130,9 +157,39 @@ public class ImageService
                 IsMe            = false,
                 BorderActive    = activeStories < 4,
                 GlowActive      = activeStories < 4,
-                Username        = result.User.InstagramUsername??result.User.Username,
-                Avatar          = result.User.ProfileImage?.Small??"jack.png",
+                Username        = username,
+                Avatar          = avatar
             });
+
+            var update = new SocialUpdate
+            {
+                Username    = username,
+                Avatar      = avatar
+            };
+            
+            var pickActivity = Random.Shared.Next(3);
+                
+            var screamIndex = Random.Shared.Next(Screams.Count);
+            var scream = Screams[screamIndex];
+
+            switch (pickActivity)
+            {
+                case 1:
+                    update.SetHaunted();
+                    break;
+                case 2:
+                    update.SetLiked();
+                    break;
+                case 3:
+                    update.SetScreamed(scream);
+                    break;
+                default:
+                    var additional = Random.Shared.Next(30);
+                    update.SetScreamed(scream, additional);
+                    break;
+            }
+            
+            _updates.Add(update);
 
             if (activeStories < 4)
             {
@@ -143,11 +200,13 @@ public class ImageService
         return _posts;
     }
 
-    public async Task<List<Post>> GetDiscovery()
+    public async Task<List<Post>> GetDiscovery(int? page = 2, int? perPage = 30)
     {
         var client = await GetClient();
         
-        var unsplashResponse = await client.GetFromJsonAsync<UnsplashResponse>($"{SearchQuery}&page=2", _jsonOptions);
+        client.DefaultRequestHeaders.Add("X-Per-Page", $"{perPage}");
+        
+        var unsplashResponse = await client.GetFromJsonAsync<UnsplashResponse>($"{SearchQuery}&page={page}", _jsonOptions);
 
         if (!(unsplashResponse?.Results.Length > 0))
         {
@@ -172,6 +231,8 @@ public class ImageService
                 Posted      = DateTime.MinValue
             });
         }
+        
+        client.DefaultRequestHeaders.Remove("X-Per-Page");
         
         return results;
     }
