@@ -21,6 +21,7 @@ public static partial class MauiProgram
 				fonts.AddFont("Creepster-Regular.ttf", "Creepster");
 			})
 			.UseMauiCommunityToolkit()
+			.UseMauiCommunityToolkitCamera()
 			.UseLucide()
 			.UseFlagstoneUI()
 			.UseAutodependencies();

@@ -55,6 +55,7 @@ public class ImageService
         };
         
         _httpClient.DefaultRequestHeaders.Add("Authorization", $"Client-ID {apiKey}");
+        _httpClient.DefaultRequestHeaders.Add("X-Page-Size", "30");
         
         _httpClientQueue.Release();
         return _httpClient;
@@ -142,6 +143,39 @@ public class ImageService
         return _posts;
     }
 
+    public async Task<List<Post>> GetDiscovery()
+    {
+        var client = await GetClient();
+        
+        var unsplashResponse = await client.GetFromJsonAsync<UnsplashResponse>($"{SearchQuery}&page=2", _jsonOptions);
+
+        if (!(unsplashResponse?.Results.Length > 0))
+        {
+            return [];
+        }
+
+        var results = new List<Post>();
+
+        foreach (var result in unsplashResponse.Results)
+        {
+            results.Add(new Post
+            {
+                ImageUrl    = result.Urls.Regular,
+                Location    = result.User.Location??string.Empty,
+                Username    = result.User.InstagramUsername??result.User.Username,
+                Description = result.Description,
+                Likes       = string.Empty,
+                IsFavourite = false,
+                Comments    = string.Empty,
+                IsLiked     = false,
+                AvatarUrl   = string.Empty,
+                Posted      = DateTime.MinValue
+            });
+        }
+        
+        return results;
+    }
+    
     private static string GetLikes(int likes)
     {
         switch (likes)

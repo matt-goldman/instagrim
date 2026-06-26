@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:smart="clr-namespace:Plugin.Maui.SmartNavigation.Behaviours;assembly=Plugin.Maui.SmartNavigation"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:icons="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
+             xmlns:vm="clr-namespace:instagrim.ViewModels"
+             xmlns:models="clr-namespace:instagrim.Models"
+             x:DataType="vm:DiscoverViewModel"
              x:Class="instagrim.Pages.DiscoverPage"
+             x:Name="PageRef"
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{DynamicResource PageTemplate}">
-<Label Text="Discover"
-       FontSize="Title"
-       TextColor="White"
-       HorizontalOptions="Center"
-       VerticalOptions="Center"
-       FontAttributes="Bold"
-       FontFamily="OpenSansSemibold" />
+    <ContentPage.Behaviors>
+        <smart:NavigatedInitBehavior />
+    </ContentPage.Behaviors>
+    
+    <Grid VerticalOptions="Fill"
+          HorizontalOptions="Fill"
+          Padding="0"
+          Margin="0"
+          RowDefinitions="70,*"
+          RowSpacing="5">
+        <fs:FsEntry HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    Margin="20,0"
+                    BorderBrush="{DynamicResource Border}"
+                    BorderWidth="1"
+                    HeightRequest="50"
+                    CornerRadius="25"
+                    Background="{DynamicResource Secondary}"
+                    Padding="30,0"
+                    PlaceholderColor="{DynamicResource MutedForeground}"
+                    Placeholder="Search the haunting..."/>
+        
+        <icons:Icon Name="{StaticResource Search}"
+                    Color="{DynamicResource MutedForeground}"
+                    Margin="30,0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"/>
+        
+        <ActivityIndicator Grid.Row="1"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           IsEnabled="True"
+                           IsRunning="True"
+                           IsVisible="{Binding IsBusy}"></ActivityIndicator>
+        
+        <ScrollView Grid.Row="1"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
+            <mct:UniformItemsLayout VerticalOptions="Fill"
+                                    HorizontalOptions="Fill"
+                                    BindableLayout.ItemsSource="{Binding Posts}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:Post">
+                        <Image Aspect="AspectFill"
+                               HeightRequest="{Binding Source={x:Reference PageRef}, Path=ImageSize}"
+                               WidthRequest="{Binding Source={x:Reference PageRef}, Path=ImageSize}"
+                               Source="{Binding ImageUrl}"
+                               Margin="0,0,0,2"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </mct:UniformItemsLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
