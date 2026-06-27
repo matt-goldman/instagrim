@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:icons="clr-namespace:Plugin.Maui.Lucide.Controls;assembly=Plugin.Maui.Lucide"
              NavigationPage.HasNavigationBar="False"
              x:Class="instagrim.Pages.CameraPage">
     <Grid VerticalOptions="Fill"
@@ -10,6 +9,7 @@
         <mct:CameraView HorizontalOptions="Fill"
                         VerticalOptions="Fill"
                         IsEnabled="False"
+                        IsVisible="False"
                         x:Name="Camera"/>
         
         <ImageButton Source="{FontImageSource FontFamily=Lucide,

@@ -23,8 +23,16 @@ public partial class NavBar : FsTabBarBase
         base.OnTabTapped(context);
     }
 
-    private void ActionButton_OnClicked(object? sender, EventArgs e)
+    private async void ActionButton_OnClicked(object? sender, EventArgs e)
     {
-        Application.Current!.Windows[0].Page!.Navigation.PushModalAsync(new NavigationPage(new CameraPage()));
+        var page = Application.Current!.Windows[0].Page!;
+        if (DeviceInfo.Current.Platform == DevicePlatform.iOS && DeviceInfo.Current.DeviceType == DeviceType.Virtual)
+        {
+            await page.DisplayAlertAsync("Camera not available", "Camera is not available on simulator", "OK");
+        }
+        else
+        {
+            await page.Navigation.PushModalAsync(new NavigationPage(new CameraPage()));
+        }
     }
 }

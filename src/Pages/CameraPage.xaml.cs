@@ -10,15 +10,28 @@ public partial class CameraPage : ContentPage
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        var cameraPermissions = await Permissions.RequestAsync<Permissions.Camera>();
-
-        if (cameraPermissions == PermissionStatus.Granted)
+        
+        if (DeviceInfo.Current.Platform == DevicePlatform.iOS && DeviceInfo.Current.DeviceType == DeviceType.Virtual)
         {
-            Camera.IsEnabled = true;
+            // camera not supported on ios simulator
+            await DisplayAlertAsync("Camera Error", "Please ensure you have granted permission to the camera. Note it doesn't work on iOS simulator.", "OK");
+            await Navigation.PopModalAsync();
         }
         else
         {
-            await DisplayAlertAsync("Camera Permission", "You need to allow Instagrim to access your camera. Please update your phone's settings.", "OK");
+            var cameraPermissions = await Permissions.RequestAsync<Permissions.Camera>();
+
+            if (cameraPermissions == PermissionStatus.Granted && MediaPicker.Default.IsCaptureSupported)
+            {
+                Camera.IsVisible = true;
+                Camera.IsEnabled = true;
+            }
+            else
+            {
+                await DisplayAlertAsync("Camera Permission",
+                    "You need to allow Instagrim to access your camera. Please update your phone's settings.", "OK");
+                await Navigation.PopModalAsync();
+            }
         }
     }
 
